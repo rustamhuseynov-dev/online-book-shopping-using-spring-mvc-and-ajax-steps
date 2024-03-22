@@ -52,4 +52,10 @@ public class BookController {
 		model.addAttribute("books", books);
 		return "redirect:/books";
 	}
+	
+	@GetMapping(path = "/edit/{id}")
+	public String editBook(@PathVariable(name = "id") Long id,Model model) {
+		service.editBook(id,model);
+		return "new-book";
+	}
 }

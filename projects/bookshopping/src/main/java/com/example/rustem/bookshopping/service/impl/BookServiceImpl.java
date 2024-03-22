@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import com.example.rustem.bookshopping.dto.BookDto;
 import com.example.rustem.bookshopping.entity.Book;
@@ -51,5 +52,15 @@ public class BookServiceImpl implements BookService {
 				.orElseThrow(() -> new RuntimeException("bele bir kitab tapilmadi"));
 		repository.deleteById(id);
 		
+	}
+	
+	@Override
+	public BookDto editBook(Long id,Model model) {
+		Book book = repository
+				.findById(id)
+				.orElseThrow(() -> new RuntimeException("bele bir kitab tapilmadi"));
+		repository.findById(id).get();
+		model.addAttribute("book", book);
+		return BookMapper.mapToBookDto(book);
 	}
 }
