@@ -14,7 +14,7 @@ import com.example.rustem.bookshopping.service.BookService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping(path = "/books")
+@RequestMapping(path = "/rest/books")
 @RequiredArgsConstructor
 public class BookRestController {
 

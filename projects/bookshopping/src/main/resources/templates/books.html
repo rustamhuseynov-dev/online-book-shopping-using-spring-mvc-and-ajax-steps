@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>Books</title>
+		<style>
+			table,th,td{
+				border: 3px solid green;
+			}
+			table{border-collapse: collapse; width: 100%;}
+			th{padding: 5px; background-color: gray;}
+			td{padding: 5px; background-color: black; color: white;}
+			td:hover{color: blue; cursor: pointer;}
+		</style>
+	</head>
+	<body>
+		<table>
+			<thead>
+				<tr><th>ID</th><th>Ad</th></tr>
+				<tbody>
+					<tr th:each="book : ${books}">
+						<td th:text="${book.id}"></td>
+						<td th:text="${book.name}"></td>
+					</tr>
+				</tbody>
+			</thead>
+		</table>
+	</body>
+</html>
