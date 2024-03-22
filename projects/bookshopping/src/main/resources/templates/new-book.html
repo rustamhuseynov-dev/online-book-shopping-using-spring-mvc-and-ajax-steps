@@ -13,14 +13,19 @@
 	<form th:action="@{/books/new-book-process}" method="POST" th:object="${book}" id="book-register-form">
 		<div class="form-group"><label for="book-name">Ad: </label>
 		<input class="form-control" id="book-name" th:field="*{name}"></div>
+		
 		<div class="form-group"><label for="book-description">Təsvir: </label>
-		<input class="form-control" id="book-description" th:field="*{description}"></div>
+        <input class="form-control" id="book-description" th:field="*{description}"></div>
+		
 		<div class="form-group"><label for="book-price">Qiymət: </label>
-		<input class="form-control" id="book-price" th:field="*{price}"></div>
+		<input class="form-control" type="number" id="book-price" th:field="*{price}"></div>
+		
 		<div class="form-group"><label for="book-author">Müəllif: </label>
 		<input class="form-control" id="book-author" th:field="*{author}"></div>
+		
 		<div class="form-group"><label for="book-pageCount">Səhifə sayı: </label>
-		<input class="form-control" id="book-pageCount" th:field="*{pageCount}"></div>
+		<input class="form-control" type="number" id="book-pageCount" th:field="*{pageCount}"></div>
+		
 		<input class="btn btn-success" type="submit" value="Qeydiyyat">
 	</form>
 </body>
