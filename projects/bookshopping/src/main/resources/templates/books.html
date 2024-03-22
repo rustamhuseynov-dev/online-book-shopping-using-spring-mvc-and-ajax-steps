@@ -6,51 +6,8 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 	<title>Books</title>
 	<style>
-		table,
-		th,
-		td {
-			border: 3px solid green;
-		}
-
-		table {
-			border-collapse: collapse;
-			width: 100%;
-		}
-
-		th {
-			padding: 5px;
-			background-color: gray;
-		}
-
-		td {
-			padding: 5px;
-			background-color: black;
-			color: white;
-		}
-
-		td:hover {
-			color: blue;
-			cursor: pointer;
-		}
-
-		#new-book-button {
-			display: block;
-			padding: 5px 10px;
-			background-color: rgb(144, 217, 71);
-			width: 150px;
-			text-align: center;
-			border-radius: 10px;
-			text-decoration: none;
-		}
-
-		#new-book-button:hover {
-			background-color: rgb(144, 117, 171);
-			cursor: pointer;
-		}
-
-		a {
-			margin-right: 5px;
-		}
+		
+		
 	</style>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
@@ -68,9 +25,11 @@
 
 <body>
 	<div th:replace="menu :: menu"></div>
-	<a th:href="@{/books/new}" id="new-book-button">Yeni Kitab</a>
-	<a th:href="@{/home}">Əsas Səhifə</a>
-	<table id="books-table">
+	<div class="container-fluid">
+	<a th:href="@{/books/new}" class="btn btn-success">Yeni Kitab</a>
+	<a th:href="@{/home}" class="btn btn-primary">Əsas Səhifə</a>
+	<div style="height: 5px;"></div>
+	<table id="books-table" class="table table-hover table-bordered">
 		<thead>
 			<tr>
 				<th>ID</th>
@@ -99,6 +58,7 @@
 		</tbody>
 		</thead>
 	</table>
+	</div>
 </body>
 
 </html>
