@@ -34,6 +34,7 @@ public class BookController {
 	public String openNewBookPage(Model model){
 		BookDto bookDto = new BookDto();
 		model.addAttribute("book", bookDto);
+		model.addAttribute("header", "Create new Book");
 		 return "new-book"; 
 	}
 	
@@ -56,6 +57,7 @@ public class BookController {
 	@GetMapping(path = "/edit/{id}")
 	public String editBook(@PathVariable(name = "id") Long id,Model model) {
 		service.editBook(id,model);
+		model.addAttribute("header", "Edit Book");
 		return "new-book";
 	}
 }

@@ -8,7 +8,7 @@
 	</style>
 </head>	
 <body>
-	<h1 style="text-align: center;">Create new book</h1>
+	<h1 th:text="${header}" style="text-align: center; color: green;">Create new book</h1>
 	
 	<form th:action="@{/books/new-book-process}" method="POST" th:object="${book}" id="book-register-form">
 		<input type="hidden" th:field="*{id}">
