@@ -34,4 +34,11 @@ public class BookServiceImpl implements BookService {
 				.orElseThrow(() -> new RuntimeException("bele bir kitab yoxdur"));
 		return BookMapper.mapToBookDto(book);
 	}
+	
+	@Override
+	public BookDto addBook(BookDto bookDto) {
+		Book book = BookMapper.mapToBook(bookDto);
+		Book savedBook = repository.save(book);
+		return BookMapper.mapToBookDto(savedBook);
+	}
 }
