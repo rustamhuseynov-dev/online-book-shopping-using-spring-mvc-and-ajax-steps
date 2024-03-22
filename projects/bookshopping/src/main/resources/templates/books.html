@@ -2,6 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 	<title>Books</title>
 	<style>
 		table,
@@ -45,6 +46,7 @@
 			background-color: rgb(144, 117, 171);
 			cursor: pointer;
 		}
+		a{margin-right: 5px;}
 	</style>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
@@ -73,6 +75,7 @@
 				<th>Müəllif</th>
 				<th>Səhifə sayı</th>
 				<th>Şəkil</th>
+				<th>Əməliyyat</th>
 			</tr>
 		<tbody>
 			<tr th:each="book : ${books}">
@@ -83,6 +86,7 @@
 				<td th:text="${book.author}"></td>
 				<td th:text="${book.pageCount}"></td>
 				<td th:text="${book.image}"></td>
+				<td><a th:href="@{/books/delete/{id}(id=${book.id})}" class="btn btn-danger">Sil</a><a class="btn btn-primary">Redakte</button></td>
 			</tr>
 		</tbody>
 		</thead>

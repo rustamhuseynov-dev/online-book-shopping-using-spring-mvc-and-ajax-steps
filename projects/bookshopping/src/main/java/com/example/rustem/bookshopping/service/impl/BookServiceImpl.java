@@ -43,4 +43,13 @@ public class BookServiceImpl implements BookService {
 		Book savedBook = repository.save(book);
 		return BookMapper.mapToBookDto(savedBook);
 	}
+	
+	@Override
+	public void deleteById(Long id) {
+		Book book = repository
+				.findById(id)
+				.orElseThrow(() -> new RuntimeException("bele bir kitab tapilmadi"));
+		repository.deleteById(id);
+		
+	}
 }
