@@ -43,7 +43,7 @@ public class BookController {
 		service.addBook(dto);
 		List<BookDto> books = service.findAll();
 		model.addAttribute("books", books);
-		return "books";
+		return "redirect:/books";
 	}
 	
 	@GetMapping(path = "/delete/{id}")

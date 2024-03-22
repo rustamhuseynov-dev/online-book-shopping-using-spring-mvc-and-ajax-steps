@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-	<title>Create Book</title>
+	<title th:text="${header}">Create Book</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 	<style>
 		#book-register-form{width: 300px; margin: auto;}
@@ -28,7 +28,7 @@
 		<div class="form-group"><label for="book-pageCount">Səhifə sayı: </label>
 		<input class="form-control" type="number" id="book-pageCount" th:field="*{pageCount}"></div>
 		
-		<input class="btn btn-success" type="submit" value="Qeydiyyat">
+		<input class="btn btn-success" type="submit" value="Yadda Saxla">
 	</form>
 </body>
 </html>
