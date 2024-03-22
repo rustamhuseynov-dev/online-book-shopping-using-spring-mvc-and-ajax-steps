@@ -10,7 +10,11 @@ public class BookMapper {
 				bookDto.getId(),
 				bookDto.getName(),
 				bookDto.getDescription(),
-				bookDto.getPrice()
+				bookDto.getPrice(),
+				bookDto.getAuthor(),
+				bookDto.getPageCount(),
+				bookDto.getImage(),
+				bookDto.getUsername()
 				);
 		return book;
 	}
@@ -19,7 +23,11 @@ public class BookMapper {
 				book.getId(),
 				book.getName(),
 				book.getDescription(),
-				book.getPrice()
+				book.getPrice(),
+				book.getAuthor(),
+				book.getPageCount(),
+				book.getImage(),
+				book.getUsername()
 				);
 		return bookDto;
 	}

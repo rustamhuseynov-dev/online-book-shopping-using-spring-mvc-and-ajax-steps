@@ -38,6 +38,8 @@ public class BookServiceImpl implements BookService {
 	@Override
 	public BookDto addBook(BookDto bookDto) {
 		Book book = BookMapper.mapToBook(bookDto);
+		book.setImage("fake.jpg");
+		book.setUsername("dea");
 		Book savedBook = repository.save(book);
 		return BookMapper.mapToBookDto(savedBook);
 	}

@@ -13,4 +13,8 @@ public class BookDto {
 	private String name;
 	private String description;
 	private Double price;
+	private String author;
+	private Integer pageCount;
+	private String image;
+	private String username;
 }
