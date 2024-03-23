@@ -44,7 +44,6 @@ public class BookController {
 	
 	@PostMapping(path = "/new-book-process")
 	public String saveBook(@Valid @ModelAttribute(name = "book") BookDto dto, BindingResult br,Model model) {
-		System.out.println("ssss");
 		if (br.hasErrors()) {
 			return "new-book";
 		}

@@ -22,16 +22,24 @@
 		</div>
 		
 		<div class="form-group"><label for="book-description">Təsvir: </label>
-        <input class="form-control" id="book-description" th:field="*{description}"></div>
+        <input class="form-control" id="book-description" th:field="*{description}">
+        <span class="error-message" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
+        </div>
 		
 		<div class="form-group"><label for="book-price">Qiymət: </label>
-		<input class="form-control" type="number" id="book-price" th:field="*{price}"></div>
+		<input class="form-control" type="number" id="book-price" th:field="*{price}">
+		<span class="error-message" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></span>
+		</div>
 		
 		<div class="form-group"><label for="book-author">Müəllif: </label>
-		<input class="form-control" id="book-author" th:field="*{author}"></div>
+		<input class="form-control" id="book-author" th:field="*{author}">
+		<span class="error-message" th:if="${#fields.hasErrors('author')}" th:errors="*{author}"></span>
+		</div>
 		
 		<div class="form-group"><label for="book-pageCount">Səhifə sayı: </label>
-		<input class="form-control" type="number" id="book-pageCount" th:field="*{pageCount}"></div>
+		<input class="form-control" type="number" id="book-pageCount" th:field="*{pageCount}">
+		<span class="error-message" th:if="${#fields.hasErrors('pageCount')}" th:errors="*{pageCount}"></span>
+		</div>
 		
 		<input class="btn btn-success" type="submit" value="Yadda Saxla">
 	</form>
