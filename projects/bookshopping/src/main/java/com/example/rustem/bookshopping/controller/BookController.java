@@ -2,8 +2,11 @@ package com.example.rustem.bookshopping.controller;
 
 import java.util.List;
 
+import javax.management.RuntimeErrorException;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,6 +17,7 @@ import com.example.rustem.bookshopping.dto.BookDto;
 import com.example.rustem.bookshopping.entity.Book;
 import com.example.rustem.bookshopping.service.BookService;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -39,7 +43,11 @@ public class BookController {
 	}
 	
 	@PostMapping(path = "/new-book-process")
-	public String saveBook(@ModelAttribute(name = "book") BookDto dto,Model model) {
+	public String saveBook(@Valid @ModelAttribute(name = "book") BookDto dto, BindingResult br,Model model) {
+		System.out.println("ssss");
+		if (br.hasErrors()) {
+			return "new-book";
+		}
 		service.addBook(dto);
 		List<BookDto> books = service.findAll();
 		model.addAttribute("books", books);
