@@ -25,7 +25,7 @@ public class BookServiceImpl implements BookService {
 
 	@Override
 	public List<BookDto> findAll() {
-		List<Book> books = repository.findAll();
+		List<Book> books = repository.findAllByUsername(session.getUsername());
 		return books.stream().map((book) -> BookMapper.mapToBookDto(book)).collect(Collectors.toList());
 	}
 
@@ -58,4 +58,5 @@ public class BookServiceImpl implements BookService {
 		model.addAttribute("book", book);
 		return BookMapper.mapToBookDto(book);
 	}
+
 }
