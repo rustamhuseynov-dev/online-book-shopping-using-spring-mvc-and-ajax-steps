@@ -28,3 +28,5 @@
 		.book-pageCount::before{content: 'Səhifə sayı: ';}
 		.addToBasket{margin-top: 5px; text-align: center;}
 		.book-image>img{width: 100%;}
+		#openBasketBtn{position: fixed;right: 20px;bottom: 20px;width: 140px;}
+		#searchInput{position: fixed;right: 20px;bottom: 70px;width: 140px;}
