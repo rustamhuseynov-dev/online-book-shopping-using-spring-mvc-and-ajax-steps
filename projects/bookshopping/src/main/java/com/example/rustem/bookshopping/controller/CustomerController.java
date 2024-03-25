@@ -21,7 +21,7 @@ public class CustomerController {
 
 	@GetMapping
 	public String showCustomerPage(Model model) {
-		List<BookDto> books = bookService.findAll();
+		List<BookDto> books = bookService.findAll(model);
 		model.addAttribute("books", books);
 		return "customer";
 	}
