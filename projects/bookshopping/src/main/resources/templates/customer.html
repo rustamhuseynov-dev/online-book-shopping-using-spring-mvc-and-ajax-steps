@@ -14,21 +14,7 @@
 <body>
 	<div th:replace="~{menu :: menu}"></div>
 	<div id="main-content">
-		<div class="book-container" th:each="book : ${books}">
-			<div class="book">
-				<span class="book-image"><img th:src="@{/images/cat.jpg}" /></span>
-				<span class="book-name" th:text="${book.name}" th:title="${book.name}"></span>
-				<span class="book-price" th:text="${book.price}" th:title="${book.price}"></span>
-				<span class="book-description" th:text="${book.description}" th:title="${book.description}"></span>
-				<span class="book-author" th:text="${book.author}" th:title="${book.author}"></span>
-				<span class="book-pageCount" th:text="${book.pageCount}" th:title="${book.pageCount}"></span>
-				<div class="addToBasket">
-					<button class="addToBasketBtn btn btn-primary">Səbətə at</button>
-				</div>
-			</div>
-		</div>
-		<button id="openBasketBtn" class="btn btn-primary">Səbət <span class="badge badge-light">10</span></button>
-		<input id="searchInput" class="form-control" placeholder="Search">
+		
 	</div>
 	<script>
 		var xht = new XMLHttpRequest();
@@ -37,7 +23,25 @@
 				var responseJSON = this.responseText
 				var booksArray = JSON.parse(responseJSON)
 				console.log(booksArray)
-			}
+				var mainContent = document.getElementById('main-content');
+				var mainContentHtml="";
+				for(var i = 0;i<booksArray.length;i++){
+					var book = booksArray[i];
+					mainContentHtml+="<div class='book-container'>";
+					mainContentHtml+="<div class='book'>";
+					mainContentHtml+="<span class='book-image'></span>";
+					mainContentHtml+="<span class='book-name' title='"+book.name+"'>"+book.name+"</span>";
+					mainContentHtml+="<span class='book-price' title='"+book.price+"'>"+book.price+"</span>";
+					mainContentHtml+="<span class='book-description' title='"+book.description+"'>"+book.description+"</span>";
+					mainContentHtml+="<span class='book-author' title='"+book.author+"'>"+book.author+"</span>";
+					mainContentHtml+="<span class='book-pageCount' title='"+book.pageCount+"'>"+book.pageCount+"</span>";
+					mainContentHtml+="<div class='addToBasket'><button class='addToBasketBtn btn btn-primary'>Səbətə at</button></div>";
+					mainContentHtml+="</div></div>";	
+				}
+				    mainContentHtml+="<button id='openBasketBtn' class='btn btn-primary'>Səbətə <span class='badge badge-light'>10</span></button>";
+				    mainContentHtml+="<input id='searchInput' class='form-control' placeholder='Search'>"
+				    mainContent.innerHTML=mainContentHtml;
+			}      
 		}
 		xht.open("GET", "/rest/books", true);
 		xht.send()
