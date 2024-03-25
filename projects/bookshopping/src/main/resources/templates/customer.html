@@ -16,6 +16,8 @@
 	<div id="main-content">
 		
 	</div>
+	<button id="openBasketBtn" class="btn btn-primary">Səbət <span class="badge badge-light">0</span></button>";
+	<input id="searchInput" class="form-control" placeholder="Search">"
 	<script>
 		var xht = new XMLHttpRequest();
 		xht.onreadystatechange = function () {
@@ -38,8 +40,6 @@
 					mainContentHtml+="<div class='addToBasket'><button class='addToBasketBtn btn btn-primary'>Səbətə at</button></div>";
 					mainContentHtml+="</div></div>";	
 				}
-				    mainContentHtml+="<button id='openBasketBtn' class='btn btn-primary'>Səbətə <span class='badge badge-light'>10</span></button>";
-				    mainContentHtml+="<input id='searchInput' class='form-control' placeholder='Search'>"
 				    mainContent.innerHTML=mainContentHtml;
 			}      
 		}
