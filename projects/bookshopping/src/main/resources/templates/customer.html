@@ -12,13 +12,17 @@
 </head>
 
 <body>
+	<!-- HTML BEGIN -->
 	<div th:replace="~{menu :: menu}"></div>
 	<div id="main-content">
 		
 	</div>
 	<button id="openBasketBtn" class="btn btn-primary">Səbət <span class="badge badge-light">0</span></button>";
 	<input id="searchInput" class="form-control" placeholder="Search">"
+	<!-- HTML END -->
 	<script>
+		//JAVASCRIPT BEGIN
+		//REFRESH BEGIN
 		var xht = new XMLHttpRequest();
 		xht.onreadystatechange = function () {
 			if (this.readyState == 4 && this.status == 200) {
@@ -45,10 +49,13 @@
 		}
 		xht.open("GET", "/rest/books", true);
 		xht.send()
-		
+		//REFRESH END
+		//FUNCTION BEGIN
 		function addToBasket(bookId){
 			alert(bookId)
 		}
+		//FUNCTION END
+		//JAVASCRIPT END
 	</script>
 </body>
 
