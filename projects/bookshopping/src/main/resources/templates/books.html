@@ -24,7 +24,7 @@
 </head>
 
 <body>
-	<div th:replace="menu :: menu"></div>
+	<div th:replace="~{menu :: menu}"></div>
 	<div class="container-fluid">
 	<a th:href="@{/books/new}" class="btn btn-success">Yeni Kitab</a>
 	<a th:href="@{/home}" class="btn btn-primary">Əsas Səhifə</a>

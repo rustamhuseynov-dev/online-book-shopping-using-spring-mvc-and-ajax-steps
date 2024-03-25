@@ -10,9 +10,9 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>	
 <body>
-	<div th:replace="menu :: menu"></div>
+	<div th:replace="~{menu :: menu}"></div>
 	<div style="width: 300px; margin: auto;" >
-		<form th:action="@{/authenticate-user}" method="POST">
+		<form th:action="@{/authenticate-user}" method="POST" class="form">
 			<div th:if="${param.error}" class="alert alert-danger alert-dismissible">
     <button type="button" class="close" data-dismiss="alert">&times;</button>
      Məlumatları səhv daxil etdiniz!
@@ -22,6 +22,12 @@
     <button type="button" class="close" data-dismiss="alert">&times;</button>
      Hesabdan çıxış etdiniz!
   </div>
+  
+  <div th:if="${userCreated}" class="alert alert-success alert-dismissible">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+     İstifadəçi uğurla yaradıldı!
+  </div>
+  
 			<div class="form-group">
 				<label for="username">İstifadəçi adı:</label>
 		    <input class="form-control" type="text" id="username" name="username" placeholder="İstifadəçi adı">
@@ -30,7 +36,7 @@
 				<label for="password">Kod:</label>
 		    <input class="form-control" type="password" id="password" name="password" placeholder="Kod">
 			</div>
-			<button class="btn btn-success">Daxil ol</button>
+			<button class="btn btn-success" type="submit">Daxil ol</button>
 			<a class="btn btn-primary" th:href="@{/create-account}">Hesab yarat</a>
 		</form>
 	</div>
