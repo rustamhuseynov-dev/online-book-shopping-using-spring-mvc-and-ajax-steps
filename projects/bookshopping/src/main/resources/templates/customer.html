@@ -37,7 +37,7 @@
 					mainContentHtml+="<span class='book-description' title='"+book.description+"'>"+book.description+"</span>";
 					mainContentHtml+="<span class='book-author' title='"+book.author+"'>"+book.author+"</span>";
 					mainContentHtml+="<span class='book-pageCount' title='"+book.pageCount+"'>"+book.pageCount+"</span>";
-					mainContentHtml+="<div class='addToBasket'><button class='addToBasketBtn btn btn-primary'>Səbətə at</button></div>";
+					mainContentHtml+="<div class='addToBasket'><button class='addToBasketBtn btn btn-primary' onclick='addToBasket("+book.id+")'>Səbətə at</button></div>";
 					mainContentHtml+="</div></div>";	
 				}
 				    mainContent.innerHTML=mainContentHtml;
@@ -45,6 +45,10 @@
 		}
 		xht.open("GET", "/rest/books", true);
 		xht.send()
+		
+		function addToBasket(bookId){
+			alert(bookId)
+		}
 	</script>
 </body>
 
