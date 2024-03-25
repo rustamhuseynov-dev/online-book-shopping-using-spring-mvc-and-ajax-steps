@@ -26,7 +26,7 @@ public class BookController {
 
 	@GetMapping
 	public String showBooks(Model model) {
-		List<BookDto> books = service.findAll();
+		List<BookDto> books = service.findAll(model);
 		model.addAttribute("books", books);
 		return "books";
 	}
@@ -45,7 +45,7 @@ public class BookController {
 			return "new-book";
 		}
 		service.addBook(dto);
-		List<BookDto> books = service.findAll();
+		List<BookDto> books = service.findAll(model);
 		model.addAttribute("books", books);
 		return "redirect:/books";
 	}
@@ -53,7 +53,7 @@ public class BookController {
 	@GetMapping(path = "/delete/{id}")
 	public String deleteById(@PathVariable(name = "id") Long id, Model model) {
 		service.deleteById(id);
-		List<BookDto> books = service.findAll();
+		List<BookDto> books = service.findAll(model);
 		model.addAttribute("books", books);
 		return "redirect:/books";
 	}

@@ -8,7 +8,7 @@ import com.example.rustem.bookshopping.dto.BookDto;
 
 public interface BookService {
 
-	List<BookDto> findAll();
+	List<BookDto> findAll(Model model);
 
 	BookDto findAllById(Long id);
 

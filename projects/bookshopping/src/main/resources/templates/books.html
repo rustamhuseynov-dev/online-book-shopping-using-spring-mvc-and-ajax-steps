@@ -7,7 +7,7 @@
 	<title>Books</title>
 	<style>
 		
-		
+		#username{display: inline-block;padding: 5px;}
 	</style>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
@@ -28,6 +28,7 @@
 	<div class="container-fluid">
 	<a th:href="@{/books/new}" class="btn btn-success">Yeni Kitab</a>
 	<a th:href="@{/home}" class="btn btn-primary">Əsas Səhifə</a>
+	<span id="username" th:text="${username}"></span>
 	<div style="height: 5px;"></div>
 	<table id="books-table" class="table table-hover table-bordered">
 		<thead>
