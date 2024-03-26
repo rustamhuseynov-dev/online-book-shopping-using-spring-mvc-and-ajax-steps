@@ -20,20 +20,23 @@
 	<div id="main-content">
 		
 	</div>
-	<button type="button" data-toggle="modal" data-target="#basketModal" id="openBasketBtn" class="btn btn-primary">
+	<button type="button" data-toggle="modal" data-target="#basketModal" id="openBasketBtn" class="btn btn-primary" onclick="openBasket()">
 		Səbət <span class="badge badge-light" id="basketBookCount">0</span>
 		</button>;
 	<input id="searchInput" class="form-control" placeholder="Search">
 	
 	<div class="modal fade" id="basketModal">
-	<div class="modal-dialog">
+	<div class="modal-dialog modal-lg">
 	<div class="modal-content">
 	<div class="modal-header">
 	<h1 class="modal-title">Səbət</h1>	
 	<button type="button" class="close" data-dismiss="modal">x</button>
 	</div>	
 	<div class="modal-body">
-		Səbət cədvəli burada olacaq
+		<table class="table table-hover table-bordered">
+			<thead><tr><th>ID</th><th>Ad</th><th>Qiymət</th><th>Miqdar</th><th>Ümumi qiymət</th></tr></thead>
+			<tbody id="basketBooksTable"></tbody>
+		</table>
 	</div>
 	<div class="modal-footer">
 	<button type="button" class="btn btn-danger" data-dismiss="modal">Bağla</button>
@@ -56,6 +59,7 @@
 		}
 		var openBasketButton=document.getElementById('openBasketBtn');
 		var basketBookCount=document.getElementById('basketBookCount');
+		var basketBooksTable = document.getElementById('basketBooksTable');
 		basketBookCount.innerHTML=basketBooks.length;
 		xht.onreadystatechange = function () {
 			if (this.readyState == 4 && this.status == 200) {
@@ -114,6 +118,20 @@
 			setTimeout(function(){
 				openBasketButton.style.display='block';
 			},300);
+		}
+		
+		function openBasket(){
+			var basketBooksTableHtml="";
+			for(var i = 0;i<basketBooks.length;i++){
+				var basketBook = basketBooks[i];
+				basketBooksTableHtml+="<tr><td>"+basketBook.book.id;
+				basketBooksTableHtml+="</td><td>"+basketBook.book.name;
+				basketBooksTableHtml+="</td><td>"+basketBook.book.price;
+				basketBooksTableHtml+="</td><td>"+basketBook.count;
+				basketBooksTableHtml+="</td><td>"+(basketBook.book.price*basketBook.count);
+				basketBooksTableHtml+="</td><td><button class='btn btn-danger'>X</button>";
+			}
+			basketBooksTable.innerHTML=basketBooksTableHtml;
 		}
 		//FUNCTION END
 		//JAVASCRIPT END
