@@ -2,6 +2,7 @@ package com.example.rustem.bookshopping.service.impl;
 
 import java.util.Optional;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.rustem.bookshopping.dto.UserDto;
@@ -24,8 +25,11 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public UserDto addUser(UserDto userDto) {
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		User user = UserMapper.mapToUser(userDto);
-		user.setPassword("{noop}" + userDto.getPassword());
+		String raw = userDto.getPassword();
+		String pass = encoder.encode(raw);
+		user.setPassword(pass);
 		user.setEnabled(1);
 		Authority authority = AuthorityMapper.mapToAuthority(userDto);
 		authority.setAuthority("ROLE_ADMIN");
