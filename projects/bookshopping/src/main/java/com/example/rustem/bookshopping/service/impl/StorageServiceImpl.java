@@ -1,12 +1,16 @@
 package com.example.rustem.bookshopping.service.impl;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.util.UUID;
 
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.rustem.bookshopping.exception.StorageException;
@@ -37,8 +41,21 @@ public class StorageServiceImpl implements StorageService {
 
 	@Override
 	public String store(MultipartFile multipartFile) {
-		// TODO Auto-generated method stub
-		return null;
+		String filename = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+		String randomFileName = "";
+		try {
+		   try(InputStream inputStream = multipartFile.getInputStream()){
+			   String originalFileName = multipartFile.getOriginalFilename();
+			   UUID uuid = UUID.randomUUID();
+			   randomFileName = originalFileName
+					   .replace(originalFileName.substring(0, originalFileName.lastIndexOf("."))
+							   , uuid.toString());
+			   Files.copy(inputStream, this.rootLocation.resolve(randomFileName),
+			   StandardCopyOption.REPLACE_EXISTING);
+		   }
+		} catch (IOException e) {
+			throw new StorageException("Fayl yadda saxlana bilmədi: " + filename, e);
+		}
 	}
 
 	@Override
