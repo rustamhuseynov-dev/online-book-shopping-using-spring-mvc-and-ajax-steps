@@ -44,18 +44,17 @@ public class StorageServiceImpl implements StorageService {
 		String filename = StringUtils.cleanPath(multipartFile.getOriginalFilename());
 		String randomFileName = "";
 		try {
-		   try(InputStream inputStream = multipartFile.getInputStream()){
-			   String originalFileName = multipartFile.getOriginalFilename();
-			   UUID uuid = UUID.randomUUID();
-			   randomFileName = originalFileName
-					   .replace(originalFileName.substring(0, originalFileName.lastIndexOf("."))
-							   , uuid.toString());
-			   Files.copy(inputStream, this.rootLocation.resolve(randomFileName),
-			   StandardCopyOption.REPLACE_EXISTING);
-		   }
+			try (InputStream inputStream = multipartFile.getInputStream()) {
+				String originalFileName = multipartFile.getOriginalFilename();
+				UUID uuid = UUID.randomUUID();
+				randomFileName = originalFileName
+						.replace(originalFileName.substring(0, originalFileName.lastIndexOf(".")), uuid.toString());
+				Files.copy(inputStream, this.rootLocation.resolve(randomFileName), StandardCopyOption.REPLACE_EXISTING);
+			}
 		} catch (IOException e) {
 			throw new StorageException("Fayl yadda saxlana bilmədi: " + filename, e);
 		}
+		return randomFileName;
 	}
 
 	@Override
