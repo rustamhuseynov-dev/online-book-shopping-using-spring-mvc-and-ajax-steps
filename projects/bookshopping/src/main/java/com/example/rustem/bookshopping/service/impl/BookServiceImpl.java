@@ -43,7 +43,7 @@ public class BookServiceImpl implements BookService {
 	@Override
 	public BookDto addBook(BookDto bookDto, MultipartFile imageFile) {
 		Book book = BookMapper.mapToBook(bookDto);
-		book.setImage("fake.jpg");
+		// book.setImage("fake.jpg");
 		book.setUsername(session.getUsername());
 		if (imageFile.isEmpty() && book.getId() != null) {
 			book.setImage(repository.findById(book.getId()).get().getImage());

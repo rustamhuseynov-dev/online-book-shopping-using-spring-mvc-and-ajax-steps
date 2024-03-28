@@ -43,15 +43,15 @@ public class StorageServiceImpl implements StorageService {
 	}
 
 	@Override
-	public String store(MultipartFile image) {
-		if (image.isEmpty()) {
-			return "fakeimage.png";
+	public String store(MultipartFile file) {
+		if (file.isEmpty()) {
+			return "fakeimage.jpg";
 		}
-		String filename = StringUtils.cleanPath(image.getOriginalFilename());
+		String filename = StringUtils.cleanPath(file.getOriginalFilename());
 		String randomFileName = "";
 		try {
-			try (InputStream inputStream = image.getInputStream()) {
-				String originalFileName = image.getOriginalFilename();
+			try (InputStream inputStream = file.getInputStream()) {
+				String originalFileName = file.getOriginalFilename();
 				UUID uuid = UUID.randomUUID();
 				randomFileName = originalFileName
 						.replace(originalFileName.substring(0, originalFileName.lastIndexOf(".")), uuid.toString());
