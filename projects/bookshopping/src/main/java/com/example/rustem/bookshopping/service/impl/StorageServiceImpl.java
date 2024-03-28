@@ -45,7 +45,7 @@ public class StorageServiceImpl implements StorageService {
 	@Override
 	public String store(MultipartFile file) {
 		if (file.isEmpty()) {
-			return "fakeimage.jpg";
+			return "fakeimage";
 		}
 		String filename = StringUtils.cleanPath(file.getOriginalFilename());
 		String randomFileName = "";
