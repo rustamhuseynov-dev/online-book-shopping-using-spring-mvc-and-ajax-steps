@@ -23,6 +23,7 @@ target/
 /nbproject/private/
 /nbbuild/
 /dist/
+/upload-dir-book-shopping-spring-ajax-rustem-h/
 /nbdist/
 /.nb-gradle/
 build/

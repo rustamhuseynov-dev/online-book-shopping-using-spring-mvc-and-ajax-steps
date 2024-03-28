@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.rustem.bookshopping.dto.BookDto;
 import com.example.rustem.bookshopping.service.BookService;
@@ -40,11 +42,13 @@ public class BookController {
 	}
 
 	@PostMapping(path = "/new-book-process")
-	public String saveBook(@Valid @ModelAttribute(name = "book") BookDto dto, BindingResult br, Model model) {
+	public String saveBook(@Valid @ModelAttribute(name = "book") BookDto dto, BindingResult br,
+			@RequestParam(value = "imageFile", required = false) MultipartFile imageFile, Model model) {
 		if (br.hasErrors()) {
 			return "new-book";
 		}
-		service.addBook(dto);
+		System.out.println(imageFile);
+		service.addBook(dto, imageFile);
 		List<BookDto> books = service.findAll(model);
 		model.addAttribute("books", books);
 		return "redirect:/books";

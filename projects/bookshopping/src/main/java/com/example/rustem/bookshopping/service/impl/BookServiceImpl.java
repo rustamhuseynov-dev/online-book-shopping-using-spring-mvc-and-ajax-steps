@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.rustem.bookshopping.config.MySession;
 import com.example.rustem.bookshopping.dto.BookDto;
@@ -12,6 +13,7 @@ import com.example.rustem.bookshopping.entity.Book;
 import com.example.rustem.bookshopping.mapper.BookMapper;
 import com.example.rustem.bookshopping.repository.BookRepository;
 import com.example.rustem.bookshopping.service.BookService;
+import com.example.rustem.bookshopping.service.StorageService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -22,6 +24,8 @@ public class BookServiceImpl implements BookService {
 	private final BookRepository repository;
 
 	private final MySession session;
+
+	private final StorageService storageService;
 
 	@Override
 	public List<BookDto> findAll(Model model) {
@@ -37,10 +41,11 @@ public class BookServiceImpl implements BookService {
 	}
 
 	@Override
-	public BookDto addBook(BookDto bookDto) {
+	public BookDto addBook(BookDto bookDto, MultipartFile imageFile) {
 		Book book = BookMapper.mapToBook(bookDto);
 		book.setImage("fake.jpg");
 		book.setUsername(session.getUsername());
+		book.setImage(storageService.store(imageFile));
 		Book savedBook = repository.save(book);
 		return BookMapper.mapToBookDto(savedBook);
 	}

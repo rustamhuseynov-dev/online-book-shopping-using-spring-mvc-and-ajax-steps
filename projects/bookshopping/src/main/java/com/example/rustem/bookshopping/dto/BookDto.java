@@ -17,7 +17,7 @@ public class BookDto {
 	private Long id;
 	@NotEmpty(message = "Boş qoymaq olmaz!")
 	@Size(min = 2, message = "Kitabın adını doğru daxil edin min 2")
-	@Size(max = 20, message = "Kitabın adını doğru daxil edin max 20")
+	@Size(max = 50, message = "Kitabın adını doğru daxil edin max 20")
 	private String name;
 	@Size(max = 300, message = "max 300 qeyd etmek olar.")
 	private String description;
