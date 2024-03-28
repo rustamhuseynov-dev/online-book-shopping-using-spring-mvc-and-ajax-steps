@@ -45,7 +45,12 @@ public class BookServiceImpl implements BookService {
 		Book book = BookMapper.mapToBook(bookDto);
 		book.setImage("fake.jpg");
 		book.setUsername(session.getUsername());
-		book.setImage(storageService.store(imageFile));
+		if (imageFile.isEmpty() && book.getId() != null) {
+			book.setImage(repository.findById(book.getId()).get().getImage());
+		} else {
+			book.setImage(storageService.store(imageFile));
+		}
+
 		Book savedBook = repository.save(book);
 		return BookMapper.mapToBookDto(savedBook);
 	}
