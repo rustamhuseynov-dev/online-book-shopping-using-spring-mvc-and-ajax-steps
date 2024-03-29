@@ -10,7 +10,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 	<link th:href="@{/styles/customer.css}" rel="stylesheet">
 	<style>
-
+            .basketBookImage{width: 30px;}
 	</style>
 </head>
 
@@ -34,7 +34,7 @@
 	</div>	
 	<div class="modal-body">
 		<table class="table table-hover table-bordered">
-			<thead><tr><th>ID</th><th>Ad</th><th>Qiymət</th><th>Miqdar</th><th>Ümumi qiymət</th></tr></thead>
+			<thead><tr><th>ID</th><th>Şəkil</th><th>Ad</th><th>Qiymət</th><th>Miqdar</th><th>Ümumi qiymət</th></tr></thead>
 			<tbody id="basketBooksTable"></tbody>
 		</table>
 	</div>
@@ -73,7 +73,7 @@
 					var book = booksArray[i];
 					mainContentHtml+="<div class='book-container'>";
 					mainContentHtml+="<div class='book'>";
-					mainContentHtml+="<span class='book-image'></span>";
+					mainContentHtml+="<span class='book-image' style='background-image:url(/files/"+book.image+");'></span>";
 					mainContentHtml+="<span class='book-name' title='"+book.name+"'>"+book.name+"</span>";
 					mainContentHtml+="<span class='book-price' title='"+book.price+"'>"+book.price+"</span>";
 					mainContentHtml+="<span class='book-description' title='"+book.description+"'>"+book.description+"</span>";
@@ -125,11 +125,13 @@
 			for(var i = 0;i<basketBooks.length;i++){
 				var basketBook = basketBooks[i];
 				basketBooksTableHtml+="<tr><td>"+basketBook.book.id;
+				basketBooksTableHtml+="</td><td>"+"<img class='basketBookImage' src='/files/"+basketBook.book.image+"' />";
 				basketBooksTableHtml+="</td><td>"+basketBook.book.name;
 				basketBooksTableHtml+="</td><td>"+basketBook.book.price;
 				basketBooksTableHtml+="</td><td>"+basketBook.count;
 				basketBooksTableHtml+="</td><td>"+(basketBook.book.price*basketBook.count);
 				basketBooksTableHtml+="</td><td><button class='btn btn-danger'>X</button>";
+				basketBooksTableHtml+="</td></tr>";
 			}
 			basketBooksTable.innerHTML=basketBooksTableHtml;
 		}
