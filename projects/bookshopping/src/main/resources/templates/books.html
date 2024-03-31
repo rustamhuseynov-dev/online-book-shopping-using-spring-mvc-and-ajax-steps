@@ -43,6 +43,7 @@
 				<th>Şəkil</th>
 				<th>Əməliyyat</th>
 			</tr>
+			</thead>	
 		<tbody>
 			<tr th:each="book : ${books}">
 				<td th:text="${book.id}"></td>
@@ -65,7 +66,6 @@
 				</td>
 			</tr>
 		</tbody>
-		</thead>
 	</table>
 	</div>
 </body>
