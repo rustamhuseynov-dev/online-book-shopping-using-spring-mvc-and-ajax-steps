@@ -30,6 +30,7 @@ public class BookServiceImpl implements BookService {
 	@Override
 	public List<BookDto> findAll(Model model) {
 		List<Book> books = repository.findAllByUsername(session.getUsername());
+		// List<Book> books = repository.findAll();
 		model.addAttribute("username", "İstifadəçi: " + session.getUsername());
 		return books.stream().map((book) -> BookMapper.mapToBookDto(book)).collect(Collectors.toList());
 	}

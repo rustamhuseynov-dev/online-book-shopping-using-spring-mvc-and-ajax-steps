@@ -23,6 +23,7 @@ import lombok.Setter;
 public class OrderDto {
 
 	private Long id;
+	private String note;
 	@NotEmpty(message = "Boş qoymaq olmaz!")
 	@Size(min = 2, message = "Sifarişin adını doğru daxil edin min 2")
 	@Size(max = 50, message = "Sifarişin adını doğru daxil edin max 20")

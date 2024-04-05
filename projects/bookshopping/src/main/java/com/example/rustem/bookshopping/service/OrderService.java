@@ -3,6 +3,7 @@ package com.example.rustem.bookshopping.service;
 import java.util.List;
 
 import com.example.rustem.bookshopping.dto.OrderDto;
+import com.example.rustem.bookshopping.entity.Order;
 
 public interface OrderService {
 
@@ -10,7 +11,9 @@ public interface OrderService {
 
 	OrderDto findAllById(Long id);
 
-	OrderDto addOrder(OrderDto orderDto);
+	List<OrderDto> addOrder(OrderDto orderDto);
+
+	List<Order> save(Order order);
 
 	List<OrderDto> findAllByUsername(String username);
 }

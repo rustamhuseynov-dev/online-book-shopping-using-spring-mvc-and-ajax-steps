@@ -24,10 +24,15 @@ public class OrderRestController {
 
 	private final OrderService service;
 
+//	@PostMapping
+//	public ResponseEntity<List<OrderDto>> add(@RequestBody OrderDto order) {
+//		List<Order> orders = service.save(order);
+//		return ResponseEntity.ok(orders);
+//	}
+
 	@PostMapping
-	public ResponseEntity<OrderDto> addOrder(@RequestBody OrderDto orderDto) {
-		System.out.println(orderDto);
-		OrderDto order = service.addOrder(orderDto);
+	public ResponseEntity<List<OrderDto>> addOrder(@RequestBody OrderDto orderDto) {
+		List<OrderDto> order = service.addOrder(orderDto);
 		return ResponseEntity.ok(order);
 	}
 
