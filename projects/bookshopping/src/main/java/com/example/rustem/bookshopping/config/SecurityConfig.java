@@ -36,15 +36,25 @@ public class SecurityConfig {
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		return http.csrf().disable().authorizeRequests().requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-				.requestMatchers(HttpMethod.GET, "/").permitAll().requestMatchers(HttpMethod.GET, "/create-account")
+				.requestMatchers(HttpMethod.GET, "/").permitAll()
+				.requestMatchers(HttpMethod.GET, "/create-account")
 				.permitAll().requestMatchers(HttpMethod.POST, "/create-account-process").permitAll()
 				.requestMatchers(HttpMethod.GET, "/customers").permitAll()
 				.requestMatchers(HttpMethod.GET, "/rest/books").permitAll()
-				.requestMatchers(HttpMethod.GET, "/styles/**").permitAll().requestMatchers(HttpMethod.GET, "/files/**")
-				.permitAll().requestMatchers(HttpMethod.GET, "/orders/confirm-order").permitAll()
-				.requestMatchers(HttpMethod.POST, "/rest/orders").permitAll().anyRequest().authenticated().and()
-				.formLogin().loginPage("/show-login").loginProcessingUrl("/authenticate-user").permitAll().and()
-				.logout().permitAll().and().httpBasic().and().headers().frameOptions().disable() // Burada
+				.requestMatchers(HttpMethod.GET, "/styles/**").permitAll()
+				.requestMatchers(HttpMethod.GET, "/files/**").permitAll()
+				.requestMatchers(HttpMethod.GET, "/orders/confirm-order").permitAll()
+				.requestMatchers(HttpMethod.POST, "/rest/orders").permitAll()
+				.anyRequest().authenticated().and()
+				.formLogin()
+				.loginPage("/show-login")
+				.loginProcessingUrl("/authenticate-user").permitAll().and()
+				.logout().permitAll()
+				.and()
+				.httpBasic()
+				.and()
+				.headers()
+				.frameOptions().disable() // Burada
 																									// frameOptions'ı
 																									// devre // dışı
 																									// bırakıyoruz
