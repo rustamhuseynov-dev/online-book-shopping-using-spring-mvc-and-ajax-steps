@@ -10,8 +10,13 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 	<link th:href="@{/styles/customer.css}" rel="stylesheet">
 	<style>
-            .basketBookImage{width: 30px;}
-            #totalPrice{font-size: 18px;}
+		.basketBookImage {
+			width: 30px;
+		}
+
+		#totalPrice {
+			font-size: 18px;
+		}
 	</style>
 </head>
 
@@ -19,52 +24,62 @@
 	<!-- HTML BEGIN -->
 	<div th:replace="~{menu :: menu}"></div>
 	<div id="main-content">
-		
+
 	</div>
-	<button type="button" data-toggle="modal" data-target="#basketModal" id="openBasketBtn" class="btn btn-primary" onclick="openBasket()">
+	<button type="button" data-toggle="modal" data-target="#basketModal" id="openBasketBtn" class="btn btn-primary"
+		onclick="openBasket()">
 		Səbət <span class="badge badge-light" id="basketBookCount">0</span>
-		</button>;
-	<input id="searchInput" class="form-control" placeholder="Search">
-	
+	</button>;
+	<input id="searchInput" class="form-control" placeholder="Search" onchange="searchBook(this.value)">
+
 	<div class="modal fade" id="basketModal">
-	<div class="modal-dialog modal-lg">
-	<div class="modal-content">
-	<div class="modal-header">
-	<h1 class="modal-title">Səbət</h1>	
-	<button type="button" class="close" data-dismiss="modal">x</button>
-	</div>	
-	<div class="modal-body">
-		<table class="table table-hover table-bordered">
-			<thead><tr><th>ID</th><th>Şəkil</th><th>Ad</th><th>Qiymət</th><th>Miqdar</th><th>Ümumi qiymət</th></tr></thead>
-			<tbody id="basketBooksTable"></tbody>
-		</table>
-		<span id="totalPrice"></span>
-	</div>
-	<div class="modal-footer">
-	<button type="button" class="btn btn-danger" data-dismiss="modal">Bağla</button>
-	<a th:href="@{/orders/confirm-order}" class="btn btn-success"  >Sifarişi təsdiqlə</a>
-	</div>
-	</div>
-	</div>
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title">Səbət</h1>
+					<button type="button" class="close" data-dismiss="modal">x</button>
+				</div>
+				<div class="modal-body">
+					<table class="table table-hover table-bordered">
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>Şəkil</th>
+								<th>Ad</th>
+								<th>Qiymət</th>
+								<th>Miqdar</th>
+								<th>Ümumi qiymət</th>
+							</tr>
+						</thead>
+						<tbody id="basketBooksTable"></tbody>
+					</table>
+					<span id="totalPrice"></span>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-danger" data-dismiss="modal">Bağla</button>
+					<a th:href="@{/orders/confirm-order}" class="btn btn-success">Sifarişi təsdiqlə</a>
+				</div>
+			</div>
+		</div>
 	</div>
 	<!-- HTML END -->
 	<script>
 		//JAVASCRIPT BEGIN
 		//REFRESH BEGIN
 		var xht = new XMLHttpRequest();
-		var booksArrayGlobal=[];
-		var basketBooks=[];
-		var basketBooksFromStorage=localStorage.getItem('basketBooks');
-		if(basketBooksFromStorage==null){
-			localStorage.setItem('basketBooks','[]');
-		}else{
-			basketBooks=JSON.parse(basketBooksFromStorage);
+		var booksArrayGlobal = [];
+		var basketBooks = [];
+		var basketBooksFromStorage = localStorage.getItem('basketBooks');
+		if (basketBooksFromStorage == null) {
+			localStorage.setItem('basketBooks', '[]');
+		} else {
+			basketBooks = JSON.parse(basketBooksFromStorage);
 		}
-		var openBasketButton=document.getElementById('openBasketBtn');
-		var basketBookCount=document.getElementById('basketBookCount');
+		var openBasketButton = document.getElementById('openBasketBtn');
+		var basketBookCount = document.getElementById('basketBookCount');
 		var basketBooksTable = document.getElementById('basketBooksTable');
 		var totalPrice = document.getElementById('totalPrice');
-		basketBookCount.innerHTML=basketBooks.length;
+		basketBookCount.innerHTML = basketBooks.length;
 		xht.onreadystatechange = function () {
 			if (this.readyState == 4 && this.status == 200) {
 				var responseJSON = this.responseText
@@ -72,116 +87,123 @@
 				console.log(booksArray)
 				booksArrayGlobal = booksArray.slice();
 				var mainContent = document.getElementById('main-content');
-				var mainContentHtml="";
-				for(var i = 0;i<booksArray.length;i++){
+				var mainContentHtml = "";
+				for (var i = 0; i < booksArray.length; i++) {
 					var book = booksArray[i];
-					mainContentHtml+="<div class='book-container'>";
-					mainContentHtml+="<div class='book'>";
-					mainContentHtml+="<span class='book-image' style='background-image:url(/files/"+book.image+");'></span>";
-					mainContentHtml+="<span class='book-name' title='"+book.name+"'>"+book.name+"</span>";
-					mainContentHtml+="<span class='book-price' title='"+book.price+"'>"+book.price+"</span>";
-					mainContentHtml+="<span class='book-description' title='"+book.description+"'>"+book.description+"</span>";
-					mainContentHtml+="<span class='book-author' title='"+book.author+"'>"+book.author+"</span>";
-					mainContentHtml+="<span class='book-pageCount' title='"+book.pageCount+"'>"+book.pageCount+"</span>";
-					mainContentHtml+="<div class='addToBasket'><button class='addToBasketBtn btn btn-primary' onclick='addToBasket("+book.id+")'>Səbətə at</button></div>";
-					mainContentHtml+="</div></div>";	
+					mainContentHtml += "<div class='book-container'>";
+					mainContentHtml += "<div class='book'>";
+					mainContentHtml += "<span class='book-image' style='background-image:url(/files/" + book.image + ");'></span>";
+					mainContentHtml += "<span class='book-name' title='" + book.name + "'>" + book.name + "</span>";
+					mainContentHtml += "<span class='book-price' title='" + book.price + "'>" + book.price + "</span>";
+					mainContentHtml += "<span class='book-description' title='" + book.description + "'>" + book.description + "</span>";
+					mainContentHtml += "<span class='book-author' title='" + book.author + "'>" + book.author + "</span>";
+					mainContentHtml += "<span class='book-pageCount' title='" + book.pageCount + "'>" + book.pageCount + "</span>";
+					mainContentHtml += "<div class='addToBasket'><button class='addToBasketBtn btn btn-primary' onclick='addToBasket(" + book.id + ")'>Səbətə at</button></div>";
+					mainContentHtml += "</div></div>";
 				}
-				    mainContent.innerHTML=mainContentHtml;
-			}      
+				mainContent.innerHTML = mainContentHtml;
+			}
 		}
 		xht.open("GET", "/rest/books", true);
 		xht.send()
 		//REFRESH END
 		//FUNCTION BEGIN
-		function addToBasket(bookId){
-			var bookExistsInBasket=false;	
-			for(var i=0;i<basketBooks.length;i++){
+		function addToBasket(bookId) {
+			var bookExistsInBasket = false;
+			for (var i = 0; i < basketBooks.length; i++) {
 				var basketBook = basketBooks[i]
-				if(basketBook.book.id==bookId){
+				if (basketBook.book.id == bookId) {
 					basketBook.count++;
-					bookExistsInBasket=true;
+					bookExistsInBasket = true;
 					break;
 				}
 			}
-			if(bookExistsInBasket){
-				
+			if (bookExistsInBasket) {
+
 			}
-			else{
-				for(var i = 0;i<booksArrayGlobal.length;i++){
-					if(booksArrayGlobal[i].id==bookId){
-						var basketBook = {count:1,book:booksArrayGlobal[i]};
+			else {
+				for (var i = 0; i < booksArrayGlobal.length; i++) {
+					if (booksArrayGlobal[i].id == bookId) {
+						var basketBook = {count: 1, book: booksArrayGlobal[i]};
 						basketBooks.push(basketBook);
 						break;
 					}
 				}
 			}
-			
-			openBasketButton.style.display='none';
-			basketBookCount.innerHTML=basketBooks.length;
-			localStorage.setItem('basketBooks',JSON.stringify(basketBooks));
-			setTimeout(function(){
-				openBasketButton.style.display='block';
-			},300);
+
+			openBasketButton.style.display = 'none';
+			basketBookCount.innerHTML = basketBooks.length;
+			localStorage.setItem('basketBooks', JSON.stringify(basketBooks));
+			setTimeout(function () {
+				openBasketButton.style.display = 'block';
+			}, 300);
 		}
-		
-		function openBasket(){
+
+		function openBasket() {
 			fillBasketTable();
 		}
-		
-		function deleteBasketBook(bookId){
-			for(var i = 0;i<basketBooks.length;i++){
-				if(basketBooks[i].book.id==bookId){
-					basketBooks.splice(i,1);
+
+		function deleteBasketBook(bookId) {
+			for (var i = 0; i < basketBooks.length; i++) {
+				if (basketBooks[i].book.id == bookId) {
+					basketBooks.splice(i, 1);
 					break;
 				}
 			}
-			openBasketButton.style.display='none';
-			basketBookCount.innerHTML=basketBooks.length;
-			localStorage.setItem('basketBooks',JSON.stringify(basketBooks));
-			setTimeout(function(){
-				openBasketButton.style.display='block';
-			},300);
+			openBasketButton.style.display = 'none';
+			basketBookCount.innerHTML = basketBooks.length;
+			localStorage.setItem('basketBooks', JSON.stringify(basketBooks));
+			setTimeout(function () {
+				openBasketButton.style.display = 'block';
+			}, 300);
 			fillBasketTable();
 		}
-		function fillBasketTable(){
-			var basketBooksTableHtml="";
-			for(var i = 0;i<basketBooks.length;i++){
+		function fillBasketTable() {
+			var basketBooksTableHtml = "";
+			for (var i = 0; i < basketBooks.length; i++) {
 				var basketBook = basketBooks[i];
-				basketBooksTableHtml+="<tr><td>"+basketBook.book.id;
-				basketBooksTableHtml+="</td><td>"+"<img class='basketBookImage' src='/files/"+basketBook.book.image+"' />";
-				basketBooksTableHtml+="</td><td>"+basketBook.book.name;
-				basketBooksTableHtml+="</td><td>"+basketBook.book.price;
-				basketBooksTableHtml+="</td><td><input "+
-				"oninput='bookCountChange("+basketBook.book.id+",this.value)' type='number' value='"+
-				basketBook.count;
-				basketBooksTableHtml+="'/></td><td id='book"+basketBook.book.id+"' >"+(basketBook.book.price*basketBook.count);
-				basketBooksTableHtml+="</td><td><button onclick='deleteBasketBook("+basketBook.book.id+")'"+
-				" class='btn btn-danger'>X</button>";
-				basketBooksTableHtml+="</td></tr>";
+				basketBooksTableHtml += "<tr><td>" + basketBook.book.id;
+				basketBooksTableHtml += "</td><td>" + "<img class='basketBookImage' src='/files/" + basketBook.book.image + "' />";
+				basketBooksTableHtml += "</td><td>" + basketBook.book.name;
+				basketBooksTableHtml += "</td><td>" + basketBook.book.price;
+				basketBooksTableHtml += "</td><td><input " +
+					"oninput='bookCountChange(" + basketBook.book.id + ",this.value)' type='number' value='" +
+					basketBook.count;
+				basketBooksTableHtml += "'/></td><td id='book" + basketBook.book.id + "' >" + (basketBook.book.price * basketBook.count);
+				basketBooksTableHtml += "</td><td><button onclick='deleteBasketBook(" + basketBook.book.id + ")'" +
+					" class='btn btn-danger'>X</button>";
+				basketBooksTableHtml += "</td></tr>";
 			}
-			basketBooksTable.innerHTML=basketBooksTableHtml;
+			basketBooksTable.innerHTML = basketBooksTableHtml;
 			CalculateTotalPrice();
 		}
-		function bookCountChange(bookId,count){
-			for(var i = 0;i<basketBooks.length;i++){
+		function bookCountChange(bookId, count) {
+			for (var i = 0; i < basketBooks.length; i++) {
 				var basketBook = basketBooks[i];
-				if(basketBook.book.id==bookId){
-					basketBook.count=count;
-					document.getElementById('book'+basketBook.book.id)
-					.innerHTML=(count*basketBook.book.price)
-					localStorage.setItem('basketBooks',JSON.stringify(basketBooks));
+				if (basketBook.book.id == bookId) {
+					basketBook.count = count;
+					document.getElementById('book' + basketBook.book.id)
+						.innerHTML = (count * basketBook.book.price)
+					localStorage.setItem('basketBooks', JSON.stringify(basketBooks));
 					CalculateTotalPrice();
 					break;
 				}
 			}
 		}
-		function CalculateTotalPrice(){
+		function CalculateTotalPrice() {
 			var totalPriceNumber = 0;
-			for(var i = 0;i<basketBooks.length;i++){
+			for (var i = 0; i < basketBooks.length; i++) {
 				var basketBook = basketBooks[i];
-				totalPriceNumber+=basketBook.count*basketBook.book.price
+				totalPriceNumber += basketBook.count * basketBook.book.price
 			}
-			totalPrice.innerHTML='Ümumi Qiymət: '+totalPriceNumber+' AZN';
+			totalPrice.innerHTML = 'Ümumi Qiymət: ' + totalPriceNumber + ' AZN';
+		}
+
+		function searchBook(searchText) {
+			xht.open("POST", "/rest/books/search", true);
+			xht.setRequestHeader("Content-type","application/json")
+			var searchObject = {search:searchText}
+			xht.send(JSON.stringify(searchObject))
 		}
 		//FUNCTION END
 		//JAVASCRIPT END

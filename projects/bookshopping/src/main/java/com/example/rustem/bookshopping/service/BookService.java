@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.rustem.bookshopping.dto.BookDto;
+import com.example.rustem.bookshopping.entity.Book;
 
 public interface BookService {
 
@@ -20,4 +21,6 @@ public interface BookService {
 	void deleteById(Integer id);
 
 	BookDto editBook(Integer id, Model model);
+
+	List<Book> findAllSearch(String search);
 }

@@ -74,4 +74,10 @@ public class BookServiceImpl implements BookService {
 		return BookMapper.mapToBookDto(book);
 	}
 
+	@Override
+	public List<Book> findAllSearch(String search) {
+		return repository.findAllSearch(search);
+
+	}
+
 }
