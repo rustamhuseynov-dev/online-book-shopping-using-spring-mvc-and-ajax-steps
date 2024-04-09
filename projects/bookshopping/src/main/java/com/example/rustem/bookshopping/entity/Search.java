@@ -12,4 +12,8 @@ import lombok.Setter;
 public class Search {
 
 	private String search;
+
+	private Integer begin;
+
+	private Integer length;
 }

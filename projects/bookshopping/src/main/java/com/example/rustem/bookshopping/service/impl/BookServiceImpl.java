@@ -85,4 +85,9 @@ public class BookServiceImpl implements BookService {
 		return repository.findAllSearchAllFields(search);
 	}
 
+	@Override
+	public List<Book> findAllSearchFindPartial(String search, Integer begin, Integer length) {
+		return repository.findAllSearchAllFieldsFindPartial(search, begin, length);
+	}
+
 }

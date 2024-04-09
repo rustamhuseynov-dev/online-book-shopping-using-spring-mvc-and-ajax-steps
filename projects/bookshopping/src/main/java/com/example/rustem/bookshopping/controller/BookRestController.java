@@ -46,4 +46,12 @@ public class BookRestController {
 		return ResponseEntity.ok(search);
 	}
 
+	// search REST API
+	@PostMapping(path = "/search-find-partial")
+	public ResponseEntity<List<Book>> findAllSearchFindPartial(@RequestBody SearchDto searchDto) {
+		List<Book> search = service.findAllSearchFindPartial(searchDto.getSearch(), searchDto.getBegin(),
+				searchDto.getLength());
+		return ResponseEntity.ok(search);
+	}
+
 }

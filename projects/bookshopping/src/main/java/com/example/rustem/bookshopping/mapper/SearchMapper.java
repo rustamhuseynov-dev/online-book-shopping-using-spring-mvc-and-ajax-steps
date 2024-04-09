@@ -7,14 +7,18 @@ public class SearchMapper {
 
 	public static Search mapToSearch(SearchDto searchDto) {
 		Search search = new Search(
-				searchDto.getSearch()
+				searchDto.getSearch(),
+				searchDto.getBegin(),
+				searchDto.getLength()
 				);
 		return search;
 	}
 	
 	public static SearchDto mapToSearchDto(Search search) {
 		SearchDto searchDto = new SearchDto(
-				search.getSearch()
+				search.getSearch(),
+				search.getBegin(),
+				search.getLength()
 				);
 		return searchDto;
 	}

@@ -25,4 +25,6 @@ public interface BookService {
 	List<Book> findAllSearch(String search);
 
 	List<Book> findAllSearchAllFields(String search);
+
+	List<Book> findAllSearchFindPartial(String search, Integer begin, Integer length);
 }

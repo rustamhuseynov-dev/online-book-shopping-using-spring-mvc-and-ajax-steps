@@ -12,4 +12,8 @@ import lombok.Setter;
 public class SearchDto {
 
 	private String search;
+
+	private Integer begin;
+
+	private Integer length;
 }
