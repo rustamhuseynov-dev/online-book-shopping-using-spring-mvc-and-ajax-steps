@@ -5,6 +5,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.rustem.bookshopping.config.MySession;
+import com.example.rustem.bookshopping.repository.OrderRepository;
 import com.example.rustem.bookshopping.service.OrderService;
 
 import lombok.RequiredArgsConstructor;
@@ -16,9 +18,13 @@ public class OrderController {
 
 	private final OrderService service;
 
+	private final OrderRepository repository;
+
+	private final MySession mySession;
+
 	@GetMapping
 	public String showOrderPage(Model model) {
-		model.addAttribute("orders", service.findAll());
+		model.addAttribute("orders", repository.findAllByUsername(mySession.getUsername()));
 		return "orders";
 	}
 

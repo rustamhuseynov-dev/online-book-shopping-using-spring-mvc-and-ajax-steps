@@ -22,38 +22,7 @@ public class OrderServiceImpl implements OrderService {
 	private final OrderRepository repository;
 
 	@Override
-	public List<OrderDto> addOrder(OrderDto orderDto) {
-		ArrayList<String> usernames = new ArrayList<>();
-		for (int i = 0; i < orderDto.getBasketBooks().size(); i++) {
-			BasketBook basketBook = orderDto.getBasketBooks().get(i);
-			if (usernames.contains(basketBook.getBook().getUsername())) {
-			} else {
-				usernames.add(basketBook.getBook().getUsername());
-			}
-		}
-
-		List<Order> orders = new ArrayList<>();
-
-		for (int i = 0; i < usernames.size(); i++) {
-			Order o = new Order();
-			o.setNote(orderDto.getNote());
-			o.setCustomer(orderDto.getCustomer());
-
-			for (int j = 0; j < orderDto.getBasketBooks().size(); j++) {
-				if (orderDto.getBasketBooks().get(j).getBook().getUsername().equals(usernames.get(i))) {
-					o.getBasketBooks().add(orderDto.getBasketBooks().get(j));
-				}
-			}
-			o.setUsername(usernames.get(i));
-			orders.add(o);
-		}
-
-		List<Order> savedOrder = repository.saveAll(orders);
-		return OrderMapper.mapToOrderDtoList(savedOrder);
-	}
-
-	@Override
-	public List<Order> save(Order order) {
+	public List<Order> addOrder(Order order) {
 		ArrayList<String> usernames = new ArrayList<>();
 		for (int i = 0; i < order.getBasketBooks().size(); i++) {
 			BasketBook basketBook = order.getBasketBooks().get(i);
@@ -69,17 +38,22 @@ public class OrderServiceImpl implements OrderService {
 			Order o = new Order();
 			o.setNote(order.getNote());
 			o.setCustomer(order.getCustomer());
+			double totalPrice = 0;
 
 			for (int j = 0; j < order.getBasketBooks().size(); j++) {
 				if (order.getBasketBooks().get(j).getBook().getUsername().equals(usernames.get(i))) {
 					o.getBasketBooks().add(order.getBasketBooks().get(j));
+					totalPrice += order.getBasketBooks().get(j).getBook().getPrice()
+							* order.getBasketBooks().get(j).getCount();
 				}
 			}
+			o.setTotalPrice(totalPrice);
 			o.setUsername(usernames.get(i));
 			orders.add(o);
 		}
 
 		return repository.saveAll(orders);
+
 	}
 
 	@Override
@@ -89,7 +63,7 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public OrderDto findAllById(Long id) {
+	public OrderDto findAllById(Integer id) {
 		Order order = repository.findById(id).orElseThrow(() -> new RuntimeException("bele bir sifaris tapilmadi"));
 		return OrderMapper.mapToOrderDto(order);
 	}

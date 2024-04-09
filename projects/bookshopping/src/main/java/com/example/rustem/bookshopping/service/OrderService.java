@@ -9,11 +9,9 @@ public interface OrderService {
 
 	List<OrderDto> findAll();
 
-	OrderDto findAllById(Long id);
+	OrderDto findAllById(Integer id);
 
-	List<OrderDto> addOrder(OrderDto orderDto);
-
-	List<Order> save(Order order);
+	List<Order> addOrder(Order order);
 
 	List<OrderDto> findAllByUsername(String username);
 }

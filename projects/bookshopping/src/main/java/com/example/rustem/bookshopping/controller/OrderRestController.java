@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.rustem.bookshopping.dto.OrderDto;
+import com.example.rustem.bookshopping.entity.Order;
 import com.example.rustem.bookshopping.service.OrderService;
 
 import lombok.RequiredArgsConstructor;
@@ -24,17 +25,17 @@ public class OrderRestController {
 
 	private final OrderService service;
 
+	@PostMapping
+	public List<Order> add(@RequestBody Order order) {
+		List<Order> orders = service.addOrder(order);
+		return orders;
+	}
+
 //	@PostMapping
-//	public ResponseEntity<List<OrderDto>> add(@RequestBody OrderDto order) {
-//		List<Order> orders = service.save(order);
+//	public ResponseEntity<List<OrderDto>> addOrder(@RequestBody Order order) {
+//		List<OrderDto> orders = service.addOrder(order);
 //		return ResponseEntity.ok(orders);
 //	}
-
-	@PostMapping
-	public ResponseEntity<List<OrderDto>> addOrder(@RequestBody OrderDto orderDto) {
-		List<OrderDto> order = service.addOrder(orderDto);
-		return ResponseEntity.ok(order);
-	}
 
 	@GetMapping
 	public ResponseEntity<List<OrderDto>> findAllOrder() {
@@ -43,7 +44,7 @@ public class OrderRestController {
 	}
 
 	@GetMapping(path = "/{id}")
-	public ResponseEntity<OrderDto> findById(@PathVariable Long id) {
+	public ResponseEntity<OrderDto> findById(@PathVariable Integer id) {
 		OrderDto orderDto = service.findAllById(id);
 		return ResponseEntity.ok(orderDto);
 	}
