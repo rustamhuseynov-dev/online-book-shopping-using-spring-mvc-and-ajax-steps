@@ -28,7 +28,7 @@ public class Order {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private Integer id;
 	private String note;
 	private String name;
 	@CreationTimestamp
@@ -42,7 +42,7 @@ public class Order {
 	private List<BasketBook> basketBooks;
 	private String username;
 
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
 

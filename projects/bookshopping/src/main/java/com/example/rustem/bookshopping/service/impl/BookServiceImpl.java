@@ -29,14 +29,19 @@ public class BookServiceImpl implements BookService {
 
 	@Override
 	public List<BookDto> findAll(Model model) {
+		List<Book> books = repository.findAll();
+		return books.stream().map((book) -> BookMapper.mapToBookDto(book)).collect(Collectors.toList());
+	}
+
+	@Override
+	public List<BookDto> findAllByUsername(Model model) {
 		List<Book> books = repository.findAllByUsername(session.getUsername());
-		// List<Book> books = repository.findAll();
 		model.addAttribute("username", "İstifadəçi: " + session.getUsername());
 		return books.stream().map((book) -> BookMapper.mapToBookDto(book)).collect(Collectors.toList());
 	}
 
 	@Override
-	public BookDto findAllById(Long id) {
+	public BookDto findAllById(Integer id) {
 		Book book = repository.findById(id).orElseThrow(() -> new RuntimeException("bele bir kitab yoxdur"));
 		return BookMapper.mapToBookDto(book);
 	}
@@ -51,20 +56,18 @@ public class BookServiceImpl implements BookService {
 		} else {
 			book.setImage(storageService.store(imageFile));
 		}
-
 		Book savedBook = repository.save(book);
 		return BookMapper.mapToBookDto(savedBook);
 	}
 
 	@Override
-	public void deleteById(Long id) {
+	public void deleteById(Integer id) {
 		Book book = repository.findById(id).orElseThrow(() -> new RuntimeException("bele bir kitab tapilmadi"));
 		repository.deleteById(id);
-
 	}
 
 	@Override
-	public BookDto editBook(Long id, Model model) {
+	public BookDto editBook(Integer id, Model model) {
 		Book book = repository.findById(id).orElseThrow(() -> new RuntimeException("bele bir kitab tapilmadi"));
 		repository.findById(id).get();
 		model.addAttribute("book", book);

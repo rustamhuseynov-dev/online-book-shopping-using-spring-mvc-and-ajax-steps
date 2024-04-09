@@ -11,11 +11,13 @@ public interface BookService {
 
 	List<BookDto> findAll(Model model);
 
-	BookDto findAllById(Long id);
+	List<BookDto> findAllByUsername(Model model);
+
+	BookDto findAllById(Integer id);
 
 	BookDto addBook(BookDto bookDto, MultipartFile image);
 
-	void deleteById(Long id);
+	void deleteById(Integer id);
 
-	BookDto editBook(Long id, Model model);
+	BookDto editBook(Integer id, Model model);
 }

@@ -28,7 +28,7 @@ public class BookController {
 
 	@GetMapping
 	public String showBooks(Model model) {
-		List<BookDto> books = service.findAll(model);
+		List<BookDto> books = service.findAllByUsername(model);
 		model.addAttribute("books", books);
 		return "books";
 	}
@@ -55,7 +55,7 @@ public class BookController {
 	}
 
 	@GetMapping(path = "/delete/{id}")
-	public String deleteById(@PathVariable(name = "id") Long id, Model model) {
+	public String deleteById(@PathVariable(name = "id") Integer id, Model model) {
 		service.deleteById(id);
 		List<BookDto> books = service.findAll(model);
 		model.addAttribute("books", books);
@@ -63,7 +63,7 @@ public class BookController {
 	}
 
 	@GetMapping(path = "/edit/{id}")
-	public String editBook(@PathVariable(name = "id") Long id, Model model) {
+	public String editBook(@PathVariable(name = "id") Integer id, Model model) {
 		service.editBook(id, model);
 		model.addAttribute("header", "Edit Book");
 		return "new-book";

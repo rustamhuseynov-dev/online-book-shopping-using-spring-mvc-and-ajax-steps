@@ -30,7 +30,7 @@ public class BookRestController {
 
 	// find All by id REST API
 	@GetMapping(path = "/{id}")
-	public ResponseEntity<BookDto> findAllById(@PathVariable Long id) {
+	public ResponseEntity<BookDto> findAllById(@PathVariable Integer id) {
 		BookDto bookDto = service.findAllById(id);
 		return ResponseEntity.ok(bookDto);
 	};

@@ -1,6 +1,7 @@
 package com.example.rustem.bookshopping.dto;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.example.rustem.bookshopping.entity.BasketBook;
@@ -12,17 +13,15 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class OrderDto {
 
-	private Long id;
+	private Integer id;
 	private String note;
 	@NotEmpty(message = "Boş qoymaq olmaz!")
 	@Size(min = 2, message = "Sifarişin adını doğru daxil edin min 2")
@@ -36,5 +35,40 @@ public class OrderDto {
 	private Customer customer;
 	private List<BasketBook> basketBooks;
 	private String username;
+
+	public Integer getId() {
+		return id;
+	}
+
+	public String getNote() {
+		return note;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public Double getTotalPrice() {
+		return totalPrice;
+	}
+
+	public Timestamp getRegister() {
+		return register;
+	}
+
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public List<BasketBook> getBasketBooks() {
+		if (basketBooks == null) {
+			basketBooks = new ArrayList<BasketBook>();
+		}
+		return basketBooks;
+	}
+
+	public String getUsername() {
+		return username;
+	}
 
 }

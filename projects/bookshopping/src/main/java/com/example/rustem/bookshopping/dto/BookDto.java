@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class BookDto {
 
-	private Long id;
+	private Integer id;
 	@NotEmpty(message = "Boş qoymaq olmaz!")
 	@Size(min = 2, message = "Kitabın adını doğru daxil edin min 2")
 	@Size(max = 50, message = "Kitabın adını doğru daxil edin max 20")
