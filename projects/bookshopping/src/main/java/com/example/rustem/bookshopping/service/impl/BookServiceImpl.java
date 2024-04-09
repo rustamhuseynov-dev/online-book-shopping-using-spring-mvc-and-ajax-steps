@@ -80,4 +80,9 @@ public class BookServiceImpl implements BookService {
 
 	}
 
+	@Override
+	public List<Book> findAllSearchAllFields(String search) {
+		return repository.findAllSearchAllFields(search);
+	}
+
 }

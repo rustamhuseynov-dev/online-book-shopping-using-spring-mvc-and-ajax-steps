@@ -23,4 +23,6 @@ public interface BookService {
 	BookDto editBook(Integer id, Model model);
 
 	List<Book> findAllSearch(String search);
+
+	List<Book> findAllSearchAllFields(String search);
 }

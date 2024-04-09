@@ -42,7 +42,7 @@ public class BookRestController {
 	// search REST API
 	@PostMapping(path = "/search")
 	public ResponseEntity<List<Book>> findAllSearch(@RequestBody SearchDto searchDto) {
-		List<Book> search = service.findAllSearch(searchDto.getSearch());
+		List<Book> search = service.findAllSearchAllFields(searchDto.getSearch());
 		return ResponseEntity.ok(search);
 	}
 
