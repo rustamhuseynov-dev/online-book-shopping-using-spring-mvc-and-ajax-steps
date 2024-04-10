@@ -11,6 +11,7 @@ import com.example.rustem.bookshopping.dto.UserDto;
 import com.example.rustem.bookshopping.entity.User;
 import com.example.rustem.bookshopping.service.UserService;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
@@ -23,11 +24,12 @@ public class UserController {
 	private boolean userCreated = false;
 
 	@GetMapping(path = "/show-login")
-	public String showLoginPage(Model model) {
+	public String showLoginPage(Model model, HttpServletRequest request) {
 		if (userCreated) {
 			model.addAttribute("userCreated", "");
 			userCreated = false;
 		}
+		request.getSession().invalidate();
 		return "my-custom-login";
 	}
 

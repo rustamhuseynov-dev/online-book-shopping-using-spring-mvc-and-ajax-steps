@@ -6,6 +6,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -22,5 +24,15 @@ public class MySession {
 		Authentication LoggedInUser = SecurityContextHolder.getContext().getAuthentication();
 		String username = LoggedInUser.getName();
 		this.username = username;
+	}
+
+	@PostConstruct
+	public void initSession() {
+		System.out.println("MySession>initSession");
+	}
+
+	@PreDestroy
+	public void destroySession() {
+		System.out.println("MySession>destroySession");
 	}
 }
