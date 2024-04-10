@@ -57,7 +57,7 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-danger" data-dismiss="modal">Bağla</button>
-					<a th:href="@{/orders/confirm-order}" class="btn btn-success">Sifarişi təsdiqlə</a>
+					<button onclick="confirmOrder()" class="btn btn-success">Sifarişi təsdiqlə</button>
 				</div>
 			</div>
 		</div>
@@ -109,7 +109,7 @@
 		}
 		xht.open("POST", "/rest/books/search-find-partial", true);
 		xht.setRequestHeader("Content-type", "application/json")
-		var searchObject = {search:'',begin:begin,length:length}
+		var searchObject = {search: '', begin: begin, length: length}
 		xht.send(JSON.stringify(searchObject))
 		//REFRESH END
 		//FUNCTION BEGIN
@@ -205,17 +205,17 @@
 		}
 
 		function searchBook(searchText) {
-			searchTextGlobal=searchText;
-			mainContentHTML="";
+			searchTextGlobal = searchText;
+			mainContentHTML = "";
 			xht.open("POST", "/rest/books/search", true);
 			xht.setRequestHeader("Content-type", "application/json")
 			begin = 0;
-			var searchObject = {search: searchText,begin:begin,length:length}
+			var searchObject = {search: searchText, begin: begin, length: length}
 			xht.send(JSON.stringify(searchObject))
 		}
-          
-          var counter = 0;
-          var allowScroll=true;
+
+		var counter = 0;
+		var allowScroll = true;
 		function onScroll() {
 			if (allowScroll) {
 
@@ -240,6 +240,23 @@
 
 		}
 		window.addEventListener("scroll", onScroll);
+
+		function confirmOrder() {
+			var xhttp = new XMLHttpRequest();
+
+			xhttp.onreadystatechange = function () {
+				if (this.readyState == 4 && this.status == 200) {
+					console.log(this.responseText);
+					window.location.href = "/orders/confirm-order";
+				}
+			};
+
+
+			xhttp.open("POST", "rest/orders/save-basket-books", true);
+			xhttp.setRequestHeader("Content-type", "application/json");
+			xhttp.send(JSON.stringify(basketBooks));
+
+		}
 		//FUNCTION END
 		//JAVASCRIPT END
 	</script>

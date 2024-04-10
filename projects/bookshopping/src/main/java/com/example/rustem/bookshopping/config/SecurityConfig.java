@@ -48,6 +48,8 @@ public class SecurityConfig {
 				.requestMatchers(HttpMethod.POST, "/rest/books/search").permitAll()
 				.requestMatchers(HttpMethod.POST, "/rest/books/search-find-partial").permitAll()
 				.requestMatchers(HttpMethod.GET,"/orders/order-confirmation-message").permitAll()
+				.requestMatchers(HttpMethod.POST, "/rest/orders/save-basket-books").permitAll()
+				.requestMatchers(HttpMethod.POST, "/orders/confirm-order-process").permitAll()
 				.anyRequest().authenticated().and()
 				.formLogin()
 				.loginPage("/show-login")

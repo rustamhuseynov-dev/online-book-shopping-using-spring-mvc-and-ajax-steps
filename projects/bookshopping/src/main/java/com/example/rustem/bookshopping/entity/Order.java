@@ -18,12 +18,14 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Table(name = "orders")
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class Order {
 
 	@Id

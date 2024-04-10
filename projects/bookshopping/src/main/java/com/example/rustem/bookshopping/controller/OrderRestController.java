@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.rustem.bookshopping.dto.OrderDto;
+import com.example.rustem.bookshopping.entity.BasketBook;
 import com.example.rustem.bookshopping.entity.Order;
 import com.example.rustem.bookshopping.service.OrderService;
 
@@ -31,11 +32,11 @@ public class OrderRestController {
 		return orders;
 	}
 
-//	@PostMapping
-//	public ResponseEntity<List<OrderDto>> addOrder(@RequestBody Order order) {
-//		List<OrderDto> orders = service.addOrder(order);
-//		return ResponseEntity.ok(orders);
-//	}
+	@PostMapping(path = "/save-basket-books")
+	public Boolean saveBasketBooks(@RequestBody List<BasketBook> basketBooks) {
+		service.saveBasketBooks(basketBooks);
+		return true;
+	}
 
 	@GetMapping
 	public ResponseEntity<List<OrderDto>> findAllOrder() {

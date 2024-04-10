@@ -1,10 +1,14 @@
 package com.example.rustem.bookshopping.config;
 
+import java.util.List;
+
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
+
+import com.example.rustem.bookshopping.entity.BasketBook;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
@@ -18,6 +22,8 @@ import lombok.Setter;
 public class MySession {
 
 	private String username;
+
+	private List<BasketBook> basketBooks;
 
 	public MySession() {
 		System.out.println("MySession>constructor");

@@ -1,34 +1,20 @@
-package com.example.rustem.bookshopping.entity;
+package com.example.rustem.bookshopping.dto;
 
 import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 
-@Entity
-@Table(name = "customer")
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
-public class Customer {
+public class CustomerDto {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-
 	@NotEmpty(message = "Boş qoymaq olmaz")
 	@Size(min = 2, message = "Minimum 2 simvol yazmaq lazımdır")
 	@Size(max = 30, message = "Maksimum 30 simvol yazmaq lazımdır")
@@ -56,5 +42,4 @@ public class Customer {
 	@Column(columnDefinition = "VARCHAR(100)")
 	@Size(max = 100, message = "Maksimum 100 simvol yazmaq lazımdır")
 	private String note;
-
 }
