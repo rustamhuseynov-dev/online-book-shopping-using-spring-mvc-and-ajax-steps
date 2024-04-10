@@ -54,7 +54,7 @@
 				if (this.readyState == 4 && this.status == 200) {
 					var response = this.responseText;
 					localStorage.setItem('basketBooks', '[]');
-					window.location.href = '/customers';
+					window.location.href = '/orders/order-confirmation-message';
 				}
 			};
 			xhttp.open("POST", "/rest/orders", true);
