@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.rustem.bookshopping.config.MySession;
 import com.example.rustem.bookshopping.entity.Customer;
+import com.example.rustem.bookshopping.repository.CustomerRepository;
 import com.example.rustem.bookshopping.repository.OrderRepository;
 import com.example.rustem.bookshopping.service.OrderService;
 
@@ -24,6 +25,8 @@ public class OrderController {
 	private final OrderService service;
 
 	private final OrderRepository repository;
+
+	private final CustomerRepository customerRepository;
 
 	private final MySession mySession;
 
@@ -50,6 +53,14 @@ public class OrderController {
 			BindingResult result) {
 		if (result.hasErrors()) {
 			return "confirm-order";
+		}
+		Customer customerFindByPhone = customerRepository.findByPhone(customer.getPhone());
+		if (customerFindByPhone == null) {
+		} else {
+			Integer id = customerFindByPhone.getId();
+			customer.setId(id);
+			customerRepository.save(customer);
+			customer = customerRepository.findById(id).get();
 		}
 		service.save(customer);
 		return "redirect:/orders/order-confirmation-message";

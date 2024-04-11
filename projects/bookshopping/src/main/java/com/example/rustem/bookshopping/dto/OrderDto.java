@@ -26,7 +26,6 @@ public class OrderDto {
 	@NotEmpty(message = "Boş qoymaq olmaz!")
 	@Size(min = 2, message = "Sifarişin adını doğru daxil edin min 2")
 	@Size(max = 50, message = "Sifarişin adını doğru daxil edin max 20")
-	private String name;
 	@NotNull(message = "boş qoymaq olmaz ")
 	@Min(value = 1_0, message = "Sifarişin qiymətini doğru daxil edin:min 10")
 	@Max(value = 10_000, message = "Sifarişin qiymətini doğru daxil edin:min 10000")
@@ -42,10 +41,6 @@ public class OrderDto {
 
 	public String getNote() {
 		return note;
-	}
-
-	public String getName() {
-		return name;
 	}
 
 	public Double getTotalPrice() {

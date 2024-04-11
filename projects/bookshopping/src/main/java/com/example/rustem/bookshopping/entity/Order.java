@@ -32,7 +32,6 @@ public class Order {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String note;
-	private String name;
 	@CreationTimestamp
 	private Timestamp register;
 	private Double totalPrice;
@@ -50,10 +49,6 @@ public class Order {
 
 	public String getNote() {
 		return note;
-	}
-
-	public String getName() {
-		return name;
 	}
 
 	public Timestamp getRegister() {
