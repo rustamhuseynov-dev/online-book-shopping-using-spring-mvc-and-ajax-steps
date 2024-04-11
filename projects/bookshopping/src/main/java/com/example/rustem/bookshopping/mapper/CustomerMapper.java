@@ -20,7 +20,7 @@ public class CustomerMapper {
 	public static CustomerDto mapToCustomerDto(Customer customer) {
 		CustomerDto customerDto = new CustomerDto(
 				customer.getId(),
-				customer.getName(),
+				customer.getName(), 
 				customer.getAddress(),
 				customer.getPhone(),
 				customer.getEmail(),

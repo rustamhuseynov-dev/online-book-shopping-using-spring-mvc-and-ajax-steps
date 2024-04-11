@@ -54,8 +54,18 @@ public class OrderController {
 		if (result.hasErrors()) {
 			return "confirm-order";
 		}
+		System.out.println(customer.getPhone());
 		Customer customerFindByPhone = customerRepository.findByPhone(customer.getPhone());
 		if (customerFindByPhone == null) {
+			Customer customerFindByEmail = customerRepository.findByEmail(customer.getEmail());
+
+			if (customerFindByEmail == null) {
+			} else {
+				Integer id = customerFindByEmail.getId();
+				customer.setId(id);
+				customerRepository.save(customer);
+				customer = customerRepository.findById(id).get();
+			}
 		} else {
 			Integer id = customerFindByPhone.getId();
 			customer.setId(id);
