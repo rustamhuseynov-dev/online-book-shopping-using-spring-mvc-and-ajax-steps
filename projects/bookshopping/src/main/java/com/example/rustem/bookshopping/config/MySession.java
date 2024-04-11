@@ -2,6 +2,9 @@ package com.example.rustem.bookshopping.config;
 
 import java.util.List;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.security.core.Authentication;
@@ -10,8 +13,6 @@ import org.springframework.stereotype.Component;
 
 import com.example.rustem.bookshopping.entity.BasketBook;
 
-import jakarta.annotation.PostConstruct;
-import jakarta.annotation.PreDestroy;
 import lombok.Getter;
 import lombok.Setter;
 

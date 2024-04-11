@@ -1,5 +1,8 @@
 package com.example.rustem.bookshopping.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -11,8 +14,6 @@ import com.example.rustem.bookshopping.dto.UserDto;
 import com.example.rustem.bookshopping.entity.User;
 import com.example.rustem.bookshopping.service.UserService;
 
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @Controller
