@@ -181,9 +181,9 @@
 				basketBooksTableHtml += "</td><td>" + basketBook.book.name;
 				basketBooksTableHtml += "</td><td>" + basketBook.book.price;
 				basketBooksTableHtml += "</td><td><input min='1' max='10000' step='1'  " +
-					"onchange='bookCountChange(" + basketBook.book.id + ",this.value)' type='number' value='" +
+					"onchange='bookCountChange(" + basketBook.book.id + ",this)' type='number' value='" +
 					basketBook.count;
-				basketBooksTableHtml += "'/></td><td id='book" + basketBook.book.id + "' >" + (basketBook.book.price * basketBook.count);
+				basketBooksTableHtml += "' onkeypress='checkCount(event)''/></td><td id='book" + basketBook.book.id + "' >" + (basketBook.book.price * basketBook.count);
 				basketBooksTableHtml += "</td><td><button onclick='deleteBasketBook(" + basketBook.book.id + ")'" +
 					" class='btn btn-danger'>X</button>";
 				basketBooksTableHtml += "</td></tr>";
@@ -191,7 +191,12 @@
 			basketBooksTable.innerHTML = basketBooksTableHtml;
 			CalculateTotalPrice();
 		}
-		function bookCountChange(bookId, count) {
+		function bookCountChange(bookId, countInput) {
+
+			if (countInput.value == '' || countInput.value == '0') {
+				countInput.value = "1";
+			}
+			var count = Number(countInput.value);
 			for (var i = 0; i < basketBooks.length; i++) {
 				var basketBook = basketBooks[i];
 				if (basketBook.book.id == bookId) {
@@ -267,6 +272,26 @@
 			xhttp.send(JSON.stringify(basketBooks));
 
 		}
+		function checkCount(event) {
+
+			var code = event.charCode;
+			if (code >= 48 && code <= 57) {
+
+			} else {
+
+				event.returnValue = false;
+			}
+
+			if (Number(event.target.value + "" + event.key) > 10000) {
+				event.target.value = "1";
+				event.returnValue = false;
+			}
+			if (event.target.value === "0" && event.key === "0") {
+				event.returnValue = false;
+			}
+
+		}
+
 		//FUNCTION END
 		//JAVASCRIPT END
 	</script>
