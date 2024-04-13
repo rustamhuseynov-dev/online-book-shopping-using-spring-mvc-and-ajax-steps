@@ -90,7 +90,7 @@
 				var responseJSON = this.responseText
 				var booksArray = JSON.parse(responseJSON)
 				console.log(booksArray)
-				booksArrayGlobal = booksArray.slice();
+				booksArrayGlobal.push(...booksArray);
 				var mainContent = document.getElementById('main-content');
 				for (var i = 0; i < booksArray.length; i++) {
 					var book = booksArray[i];
@@ -216,6 +216,7 @@
 		function searchBook(searchText) {
 			searchTextGlobal = searchText;
 			mainContentHTML = "";
+			booksArrayGlobal = [];
 			xht.open("POST", "/rest/books/search", true);
 			xht.setRequestHeader("Content-type", "application/json")
 			begin = 0;
